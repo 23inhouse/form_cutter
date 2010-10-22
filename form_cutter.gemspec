@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Benjamin Lewis"]
   s.date = %q{2010-10-22}
-  s.description = %q{Lets you wrap your form helper methods is custom html.}
+  s.description = %q{Lets you wrap your form helper methods is custom html}
   s.email = %q{23inhouse@gmail.com}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
      "lib/generators/form_cutter/install_generator.rb",
      "lib/generators/form_cutter/templates/_form.html.erb",
      "lib/generators/form_cutter/templates/_form.html.haml",
+     "lib/generators/form_cutter/templates/default.html.erb",
      "lib/generators/form_cutter/templates/en.yml",
      "lib/generators/form_cutter/templates/form_cutter.rb"
   ]
