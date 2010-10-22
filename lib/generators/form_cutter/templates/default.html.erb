@@ -1,0 +1,5 @@
+<div class="forms">
+  <%= label(object_name, method, label_name) %><em><%= required %></em><br/>
+  <%= send(helper_method_name, object_name, method, options) %>
+  <% if hint.present? %><p><%= hint %></p><% end %>
+</div>
