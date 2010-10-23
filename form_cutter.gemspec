@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{form_cutter}
-  s.version = "1.0.0"
+  s.version = "1.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Benjamin Lewis"]
@@ -24,7 +24,6 @@ Gem::Specification.new do |s|
      "lib/generators/form_cutter/USAGE",
      "lib/generators/form_cutter/install_generator.rb",
      "lib/generators/form_cutter/templates/_form.html.erb",
-     "lib/generators/form_cutter/templates/_form.html.haml",
      "lib/generators/form_cutter/templates/default.html.erb",
      "lib/generators/form_cutter/templates/en.yml",
      "lib/generators/form_cutter/templates/form_cutter.rb"

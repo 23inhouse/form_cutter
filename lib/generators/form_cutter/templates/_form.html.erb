@@ -1,13 +1,11 @@
 <%%= form_for(@<%= singular_name %>) do |f| %>
-  <%%= f.error_notification %>
-
-  <div class="inputs">
+  <div class="fields">
   <%- attributes.each do |attribute| -%>
     <%%= f.<%= attribute.field_type %> :<%= attribute.name %> %>
   <%- end -%>
   </div>
 
   <div class="actions">
-    <%%= f.button :submit %>
+    <%%= f.submit :submit %>
   </div>
 <%% end %>
