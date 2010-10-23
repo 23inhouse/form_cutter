@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Benjamin Lewis"]
-  s.date = %q{2010-10-22}
+  s.date = %q{2010-10-23}
   s.description = %q{Lets you wrap your form helper methods is custom html}
   s.email = %q{23inhouse@gmail.com}
   s.extra_rdoc_files = [
