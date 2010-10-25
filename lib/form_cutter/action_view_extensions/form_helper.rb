@@ -36,15 +36,13 @@ module FormCutter
     private
       
       def locals(object_name, method, helper_method_name, options, content = nil)
+        options[:hint] = (options[:hint] || '').html_safe
+        options[:label_name] = (options[:label] || '').html_safe
         options[:required] = options[:object].class.validators_on(method).map(&:class).include? ActiveModel::Validations::PresenceValidator if options[:required].nil?
-        options[:required] = (options[:required] == true) ? I18n.t(:"form_cutter.required.mark", :default => '*') : ''
+        options[:required] = options[:required] ? I18n.t(:"form_cutter.required.mark", :default => '*') : ''
         
-        locals = { :object => options[:object], :object_name => object_name, :method => method, :helper_method_name => helper_method_name, :options => options }
-        locals.merge!({:hint => (options.delete(:hint) || '').html_safe})
-        locals.merge!({:label_name => options.delete(:label)})
-        locals.merge!({:report => options.delete(:report)})
-        locals.merge!({:required => options.delete(:required)})
-        locals.merge!({:template => options.delete(:template)})
+        locals = { :object => options[:object], :object_name => object_name, :method => method, :helper_method_name => helper_method_name, :options => options }.merge(options)
+        options = clean_options(options)
         locals
       end
       
@@ -72,12 +70,16 @@ module FormCutter
         report?(options) ? FormCutter.reports_path : FormCutter.forms_path
       end
       
+      def clean_options(options)
+        options.delete_if { |k, v| [:hint, :label, :label_name, :report, :required, :template].include?(k) }
+      end
+      
       def report?(options)
         options[:report]
       end
       
       def template?(options)
-        !(options[:template] == false)
+        !(options[:template] === false)
       end
       
       def template_error
