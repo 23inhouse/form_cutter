@@ -61,7 +61,7 @@ module FormCutter
           [path, template, method.to_s].join('/'),         # forms/custom/title.html.erb
           [path, template, helper_method_name].join('/'),  # forms/custom/text_field.html.erb
           [path, template, 'default'].join('/'),           # forms/custom/default.html.erb
-          [path, resource, method.to_s].join('/'),         # forms/title.html.erb
+          [path, resource, method.to_s].join('/'),         # forms/blog/title.html.erb
           [path, resource, helper_method_name].join('/'),  # forms/blog/text_field.html.erb
           [path, helper_method_name].join('/'),            # forms/text_field.html.erb
           [path, 'default'].join('/')                      # forms/default.html.erb

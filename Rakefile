@@ -32,7 +32,7 @@ begin
     s.summary = "Forms made templatable!"
     s.email = "23inhouse@gmail.com"
     s.homepage = "http://github.com/23inhouse/form_cutter"
-    s.description = "Lets you wrap your form helper methods is custom html"
+    s.description = "Lets you wrap your form helper methods in custom html"
     s.authors = ['Benjamin Lewis']
     s.files =  FileList["[A-Z]*(.rdoc)", "{generators,lib}/**/*", "init.rb"]
   end
