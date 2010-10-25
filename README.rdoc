@@ -38,6 +38,9 @@ Use the form builders normally, except don't add any markup (unless you want to)
       <%= f.select :section, ['choices'] %>
       <%= f.radio_button :am_fm, ['radio'] %>
       <%= f.check_box :terms_and_conditions %>
+      <%= f.date_select :dob %>
+      <%= f.time_select :check_in_time %>
+      <%= f.datetime_select :updated_at %>
     </fieldset>
     <div class="buttons">
       <%= f.submit 'Save' %>

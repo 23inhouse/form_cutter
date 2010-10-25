@@ -33,6 +33,19 @@ module FormCutter
         end
       end
       
+      ([:date_select, :time_select, :datetime_select]).each do |helper_method_name|
+        module_eval <<-METHOD, __FILE__, __LINE__ + 1
+          def #{helper_method_name}(object_name, method, options = {}, html_options = {})
+            begin
+              raise template_error if !template?(options) || caller.first.include?("/app/views/"+base_template_path(options))
+              render(:template => template_file(object_name, method, options, '#{helper_method_name}'), :locals => locals(object_name, method, '#{helper_method_name}', options, html_options))
+            rescue ActionView::MissingTemplate
+              super(object_name, method, clean_options(options), html_options = {})
+            end
+          end
+        METHOD
+      end
+      
     private
       
       def locals(object_name, method, helper_method_name, options, content = nil)
