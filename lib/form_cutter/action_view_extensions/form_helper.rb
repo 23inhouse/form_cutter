@@ -9,7 +9,7 @@ module FormCutter
               raise template_error if !template?(options) || caller.first.include?("/app/views/"+base_template_path(options))
               render(:template => template_file(object_name, method, options, '#{helper_method_name}'), :locals => locals(object_name, method, '#{helper_method_name}', options))
             rescue ActionView::MissingTemplate
-              super
+              super(object_name, method, clean_options(options))
             end
           end
         METHOD
@@ -20,7 +20,7 @@ module FormCutter
           raise template_error if !template?(options) || caller.first.include?("/app/views/"+base_template_path(options))
           render(:template => template_file(object_name, method, options, :check_box), :locals => locals(object_name, method, :check_box, options))
         rescue ActionView::MissingTemplate
-          super
+          super(object_name, method, clean_options(options), checked_value, unchecked_value)
         end
       end
       
@@ -29,7 +29,7 @@ module FormCutter
           raise template_error if !template?(options) || caller.first.include?("/app/views/"+base_template_path(options))
           render(:template => template_file(object_name, method, options, :radio_button), :locals => locals(object_name, method, :radio_button, options))
         rescue ActionView::MissingTemplate
-          super
+          super(object_name, method, tag_value, clean_options(options))
         end
       end
       
