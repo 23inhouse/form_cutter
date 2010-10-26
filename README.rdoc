@@ -1,11 +1,11 @@
 == FormCutter
 
-The default rails form builder is great but it is so tedious to change the html that goes around it.
-This gem wraps *your* html around the form elements.  So all you have to do is this:
+The default rails form builder is great but it is so tedious to change the HTML that goes around it.
+This gem wraps *your* HTML around the form elements.  So all you have to do is this:
 
   <%= f.text_field :name %>
 
-And add your html template in <tt>app/views/forms/text_field.html.erb</tt> like this:
+And add your HTML form helper template in <tt>app/views/forms/text_field.html.erb</tt> like this:
   
   <div class="forms">
     <%= label(object_name, method, label_name) %><em><%= required %></em><br/>
@@ -47,23 +47,32 @@ Use the form builders normally, except don't add any markup (unless you want to)
     </div>
   <% end %>
 
-The form builders will now wrap all form helper methods with *your* html.
+The form builders will now wrap all form helper methods with *your* HTML.
 
 You're done.
 
 === Customization
 
-There will always be an exception to the rule.  So there are 2 ways to change the html wrapper.
+There will always be an exception to the rule.  So there are 2 ways to change the form helper HTML wrapper.
 1. Like a resource - by creating a directory inside forms/, <tt>app/views/forms/blog/</tt>.
 2. Passing the :template option - either false or the '<tt>path/to/template</tt>'.
 
-It will render the first erb template that it finds.  If you use <tt><%= f.text_field :title, :template => 'custom' %></tt> for the @blog model, it looks in this order:
+==== The :template option
+
+The :template option is useful if you have a field or group of fields that don't work with your normal templates.
+There's always one.  This option tells the renderer to look for a specific HTML erb file or to look in a specific
+folder, if a file by that name doesn't exist.  Below is the order in which files will be found and rendered.
+
+It will render the first erb template that it finds.
+For instance in this case of <tt><%= f.text_field :title, :template => 'custom' %></tt> for the @blog model,
+it looks in this order:
+
 * forms/blog/custom.html.erb
 * forms/custom.html.erb
 * forms/custom/title.html.erb
 * forms/custom/text_field.html.erb
 * forms/custom/default.html.erb
-* forms/title.html.erb
+* forms/blog/title.html.erb
 * forms/blog/text_field.html.erb
 * forms/text_field.html.erb
 * forms/default.html.erb
@@ -76,8 +85,17 @@ This will search in app/views/reports/ instead of app/views/forms/.
 
   <%= f.text_field(:title, :report => true) %>
 
+In an admin or business data entry setting, this is useful to quickly get a "photocopy" of the completed form.
+
+  <%= form_for(@post, :template => true) do |form| %>
+    <%= render 'form' %>
+  <% end %>
+
+The :template or :report optons can be passed to <tt>form_for</tt> or <tt>fields_for</tt> and it will be applied to
+all helper methods within.
+
 ==== Other options
-You can pass any options to the helper methods.  These will become availble in the.
+You can pass any options to the helper methods.  These will become availble in the helper templates.
 
   <%= f.text_field(:title, :hint => 'This is a field hint', :anything => 'anything you want') %>
 
@@ -88,6 +106,10 @@ Will give you:
   
   <%= options[:anything] %>
   => 'anything you want'
+  
+note: in the anything case, the option will be added to the HTML output.
+  
+  <input type="text" anything="anything you want">
 
 FormCutter has several configuration values. You can read and change them in the initializer created by FormCutter, so if you haven't executed the command below yet, please do:
 
